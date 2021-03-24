@@ -11,6 +11,132 @@ enum PersonStatus {
     EXCELLENT
 };
 
+class Posession {
+    public:
+
+    Posession(std::string s){
+        name = s;
+    }
+
+    void setName(std::string nm){
+        name = nm;
+    }
+
+    std::string getName(){
+        return name;
+    }
+
+    std::string name;
+};
+
+class Vehicle {
+public:
+    int numWheels;
+    bool weels;
+
+    Vehicle(int n, bool h){
+        numWheels = n;
+        weels = h;
+    }
+
+    void setWheels(int w){
+        numWheels = w;
+    }
+
+    int getWheels(){
+        return numWheels;
+    }
+
+    void setHasWheels(bool h){
+        weels = h;
+    }
+
+    bool hasWheels(){
+        return weels;
+    }
+};
+
+class Car : public Vehicle, public Posession
+{
+private:
+    std::string make;
+    std::string model;
+    int year;
+    int month;
+    int day;
+    std::string color;    
+
+public:
+    Car(std::string make, std::string model, int y, int m, int d, std::string color, int numWheels, bool hasWheels, std::string name) : make(make), model(model), year(y), month(m), day(d), color(color), Vehicle(numWheels, hasWheels), Posession(name) {};
+    Car() : make(""), model(""), year(0), month(0), day(0), color(""), Vehicle(0, false), Posession("") {};
+
+    void setMake(std::string m);
+    std::string getMake();
+    void setModel(std::string m);
+    std::string getModel();
+    void setYear(int y);
+    int getYear();
+    void setMonth(int m);
+    int getMonth();
+    void setDay(int d);
+    int getDay();
+    void setColor(std::string c);
+    std::string getColor();
+
+    void printDetails(){
+        std::cout << make << "\n" << model << "\n" << year << "\n" << month << "\n" << day << "\n"<< color << "\n" << name << "\n" << weels << "\n" << numWheels << "\n" << std::endl;
+    }
+};
+ 
+
+void Car::setMake(std::string m){
+    make = m;
+}
+
+std::string Car::getMake(){
+    return make;
+}
+
+void Car::setModel(std::string m){
+    model = m;
+}
+
+std::string Car::getModel(){
+    return model;
+}
+
+void Car::setColor(std::string m){
+    color = m;
+}
+
+std::string Car::getColor(){
+    return color;
+}
+
+void Car::setYear(int y){
+    year = y;
+}
+
+int Car::getYear(){
+    return year;
+}
+
+int Car::getMonth(){
+    return month;
+}
+
+void Car::setMonth(int m){
+    month = m;
+}
+
+int Car::getDay(){
+    return day;
+}
+
+void Car::setDay(int d){
+    day = d;
+}
+
 class Dog {
     
 
@@ -131,6 +257,14 @@ class Person : public PersonBase {
         return pass;
     }
 
+    void setCar(Car c){
+        car = c;
+    }
+
+    Car getCar(){
+        return car;
+    }
+
     void setPass(bool p);
     void doesPass();
 
@@ -144,6 +278,7 @@ class Person : public PersonBase {
     int age;
     bool pass;
     float balance;
+    Car car;
 };
 
 Person::Person() : name(""), age(0), pass(false), balance(0.00){}
@@ -216,6 +351,13 @@ int main(){
         }
         p.printDetails();
     }
+
+    Car c("Ford", "Focus", 2020, 6, 12, "Blue", 4, true, "My Car");
+
+    joe.setCar(c);
+
+    Car joeCar = joe.getCar();
+    joeCar.printDetails();
     
     return 0;
 }
